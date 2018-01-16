@@ -19,7 +19,7 @@ class AnwesenheitsSimulation extends IPSModule
 		IPS_SetHidden($this->GetIDForIdent("SimulationData"), true);
 		$this->RegisterVariableString("SimulationView", "Simulationsvorschau", "~HTMLBox");
 		$this->RegisterVariableString("SimulationDay", "Simulationsquelle (Tag)", "");
-		$this->RegisterVariableBoolean("Active", "Simulation aktiv", "~Switch");
+		$this->RegisterVariableBoolean("Active", "Simulatie actief", "~Switch");
 		$this->EnableAction("Active");
 
 		$this->CreateCategoryByIdent($this->InstanceID, "Targets", "Targets (Simulation)");
@@ -53,7 +53,7 @@ class AnwesenheitsSimulation extends IPSModule
 			SetValue($this->GetIDForIdent("SimulationData"), "");
 			$this->SetTimerInterval("UpdateTargetsTimer", 0);
 			IPS_SetEventActive($this->GetIDForIdent("UpdateDataTimer"), false);
-			SetValue($this->GetIDForIdent("SimulationView"), "Simulation deaktiviert");
+			SetValue($this->GetIDForIdent("SimulationView"), "Simulatie uitgeschakeld");
 			IPS_SetHidden($this->GetIDForIdent("SimulationView"), true);
 		}
 
@@ -171,7 +171,7 @@ class AnwesenheitsSimulation extends IPSModule
 
 		$simulationData = $this->GetDataArray(array_merge($weekDays, $singleDays), $targetIDs);
 		if(sizeof($simulationData) == 0) {
-			SetValue($this->GetIDForIdent("SimulationDay"), "Zu wenig Daten!");
+			SetValue($this->GetIDForIdent("SimulationDay"), "Te weinig data!");
 		} else {
 			SetValue($this->GetIDForIdent("SimulationDay"), $simulationData['Date']);
 			SetValue($this->GetIDForIdent("SimulationData"), wddx_serialize_value($simulationData['Data']));
@@ -295,11 +295,11 @@ class AnwesenheitsSimulation extends IPSModule
 
 		$html = "<table style='width: 100%; border-collapse: collapse;'>";
 		$html .= "<tr>";
-		$html .= "<td style='padding: 5px; font-weight: bold;'>Aktor</td>";
-		$html .= "<td style='padding: 5px; font-weight: bold;'>Letzter Wert</td>";
-		$html .= "<td style='padding: 5px; font-weight: bold;'>Seit</td>";
-		$html .= "<td style='padding: 5px; font-weight: bold;'>Nächster Wert</td>";
-		$html .= "<td style='padding: 5px; font-weight: bold;'>Um</td>";
+		$html .= "<td style='padding: 5px; font-weight: bold;'>Schakelaar</td>";
+		$html .= "<td style='padding: 5px; font-weight: bold;'>Laatste stand</td>";
+		$html .= "<td style='padding: 5px; font-weight: bold;'>Sinds</td>";
+		$html .= "<td style='padding: 5px; font-weight: bold;'>Volgende stand</td>";
+		$html .= "<td style='padding: 5px; font-weight: bold;'>Om</td>";
 		$html .= "</tr>";
 
 		foreach ($targetIDs as $targetID) {
